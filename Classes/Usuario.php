@@ -1,10 +1,9 @@
 <?php 
 class Usuario{
-
-		private $idusuario;
-		private $deslogin;
-		private $dessenha;
-		private $dtcadastro;
+	private $idusuario;
+	private $deslogin;
+	private $dessenha;
+	private $dtcadastro;
 
 
 public function getIdusuario(){
@@ -31,10 +30,9 @@ public function getDtcadastro(){
 public function setDtcadastro($value){
 	$this->dtcadastro = $value;
 }
-
+//Carrega um usuario pelo ID , apenas um por vez
 public function carregaPeloId($id){
 	$sql = new Sql();
-
 	$result = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(":ID"=>$id));
 	if (count($result)>0) {
 		$linha = $result[0];
@@ -45,6 +43,35 @@ public function carregaPeloId($id){
 		
 	}
 
+}
+//pra carregar todos usuarios
+public static  function getList(){
+	$sql = new Sql();
+	return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+}
+//Carrega pelo login
+public static function search($login){
+	$sql = new Sql();
+	return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin",array(
+		':SEARCH'=>"%".$login."%"
+		));
+}
+public function login($login,$senha){
+	$sql = new Sql();
+	$results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :SENHA",array(
+	":LOGIN"=>$login,
+	":SENHA"=>$senha));
+
+	if (count($results)>0) {
+		$linha = $results[0];
+		$this->setIdusuario($linha['idusuario']);
+		$this->setDeslogin($linha['deslogin']);
+		$this->setDessenha($linha['dessenha']);
+		$this->setDtcadastro(new DateTime($linha['dtcadastro']));
+}else{
+	throw new Exception("Login ou senha inválidos");
+	
+}
 }
 public function __toString(){
 		return json_encode(array("idusuario"=>$this->getIdusuario(),

@@ -1,9 +1,19 @@
 <?php 
 require_once("config.php");
 
-$root = new Usuario();
+//Carrega apenas um ususario
+//$root = new Usuario();
+//$root->carregaPeloId(3);
 
-$root->carregaPeloId(3);
+//Carrega uma lista de ususarios
+//$lista = Usuario::getList();
 
-echo $root;
+//Carrega uma lista de usuarios bunscando pelo login
+//$search = Usuario::search("c");
+
+//Carrega uma lista de usuarios bunscando pelo login
+$usuarios = new Usuario();
+$usuarios->login("joaozao","qwt");
+
+echo $usuarios;
  ?>
