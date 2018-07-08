@@ -12,8 +12,21 @@ require_once("config.php");
 //$search = Usuario::search("c");
 
 //Carrega uma lista de usuarios bunscando pelo login
-$usuarios = new Usuario();
-$usuarios->login("joaozao","qwt");
+//$usuarios = new Usuario();
+//$usuarios->login("joaozao","qwt");
 
-echo $usuarios;
+//Crinado um novo usuario
+//$aluno = new Usuario();
+//$aluno -> setDeslogin("Neymar");
+//$aluno ->setDessenha("cai cai");
+//$aluno ->insert();
+//echo $aluno;
+ 
+$usuario = new Usuario();
+
+$usuario->carregaPeloId(6);
+
+$usuario->update("Mario","Atras do armarios");
+
+echo $usuario;
  ?>
