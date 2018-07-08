@@ -21,12 +21,15 @@ require_once("config.php");
 //$aluno ->setDessenha("cai cai");
 //$aluno ->insert();
 //echo $aluno;
- 
+
+//alterar usuario 
+//$usuario = new Usuario();
+//$usuario->carregaPeloId(6);
+//$usuario->update("Mario","Atras do armarios");
+
 $usuario = new Usuario();
-
-$usuario->carregaPeloId(6);
-
-$usuario->update("Mario","Atras do armarios");
-
+$usuario->carregaPeloId(1);
+$usuario->delete(); 
 echo $usuario;
+
  ?>
